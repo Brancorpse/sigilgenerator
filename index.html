@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Sigilizador Magia do Caos</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' href="style.css">  
+</head>
+
+<script type="text/javascript" src="../src/sigilizador.js"></script>
+
+<! Chamando função que executa o sigilizador -->
+<script>
+    var sigilizador;
+    global.onload = function () { 
+        sigilizador =  new Sigilizador();                
+            
+    }
+    
+    function getSigilo(_vontade) {
+        sigilizador.sigilize(_vontade);
+        document.getElementById('mostrarSigiloFeito').innerHTML = sigilizador.sigilo;    
+    }    
+
+</script>
+<body>  
+
+    <! Criando corpo da página principal -->
+    <div>        
+        <a href="#"><img src="caosfera.png" class="logo" alt=""></a>        
+    </div>
+    <br>
+    <br>
+    <h1>Sigilizador</h1>
+
+    <br>
+    <br>
+    <br>
+
+    <div id="conteudoSigilo">
+        <div id="sigiloForm" >
+            <input type="text" maxlength="200" class="geradorsigiloTextarea" name="textosigilo" id="camposigilo" value="Esta é minha vontade para sigilizar." autocomplete='off' />
+            <div id="button">
+                <br>
+                <br>
+                <br>
+            
+                <input class="estilobotao" type="submit" name="button" id="botaosigilo" value="Sigilize!" onclick="getSigilo(document.getElementById('camposigilo').value)" />    
+            </div>
+            <div id="mostrarSigiloFeito"></div>
+        </div>    
+    </div>    
+</body>
+</html>
