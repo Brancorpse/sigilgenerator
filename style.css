@@ -1,54 +1,258 @@
-@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* Configurando fonte */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'League Spartan', sans-serif;
+    font-family: 'Mulish', sans-serif;
 }
-/* importado fonte do Google Fonts */
+
+
+/* Configurações Globais */
+:root {  
+
+    --container-bg-color: #333;
+ 
+    --button-hover-color: rgba(152, 152, 155, 0.5);
+    --hover-width: 100%;
+    --other-width: 0%;
+    --speed: 1000ms;
+}
+
+
+
+  /* Configurando o corpo do gerador */
+html, body{
+    padding:0;
+    margin:0;
+    width:100%;
+    height:100%;
+}
 
 
 .logo {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 25%;    
-
-}
-
-h1 {     
-
-    text-align: center;
- 
-}
-
-
-
-#conteudoSigilo .geradorsigiloTextarea {
-    display: flex;
-    margin-left: auto;
+    margin-left: 30%;
     margin-right: auto;
     width: 35%;
-    height: 50%;
-    padding: 12px 15px;
-    outline: none;
-    margin-bottom: 20px;
+
 
 }
 
-#conteudoSigilo .estilobotao {
+h2 {
+
+    margin-left: 41%;
+    margin-right: auto;
+    width: 20%;  
+    font-family: 'Mulish';
+}
+
+  
+h1 {
+    font-size:4rem;
+    color:#fff;
+    position:absolute;
+    left:50%;
+    top:15%;
+    transform:translateX(-50%);
+    white-space:nowrap;
+  }
+  
+  .container {
+    position:relative;
+    width:100%;
+    height:100%;
+}
+  
+.split {
+    position:absolute;
+    width:50%;
+    height:100%;
+    overflow:hidden;
+}
+  
+.split.left{
+    left:0;
+    background:url('/img/black.jfif') center center no-repeat;
+    background-size: cover;
+    width: 100%;
+}
+  
+ 
+#generator-container{
+    opacity:.8;
+    position:absolute;
+    top:3%;
+    left:36%;
+} 
+
+  
+#submit:hover{
+    background-color:var(--button-hover-color);
+}
+  
+
+#form {
+    background:rgba(0, 0, 0, 0.6);
+    padding:3%;
+    color:white;
+    text-align: center;
+    margin-right:10%;
+    margin-left: 10%;
+}
+
+/* Configurando radio-buttons */
+#mood{
+    display:block;
+    margin-top:2.5%;
+    }
+    
+    #mood > label{
+    font-family: 'Mulish', cursive;
+    font-weight: bold;   
+    
+}
+
+/* Configurando botão de gerar sigilos */
+#submit {
     font-size: 14px;
     font-weight: 600;
     padding: 15px 30px;
-    color: #fff;
-    background-color: #000;
+    color: #000;
+    background-color: #fff;
     border-radius: 4px;
     cursor: pointer;
     border: none;
     outline: none;
     transition: 0.2s;
-    margin-left: 48%;
-    margin-right: 0%;
-
 }
 
+
+ /* Configurando canva que receberá os sigilos */ 
+#generator {
+    background:rgba(41, 39, 39, 0.8);
+    background-image: "";
+}
+  
+#left-arrow{
+    width:40px;
+    position:absolute;
+    top:45%;
+    right:95%;
+}
+  
+#right-arrow{
+    width:40px;
+    position:absolute;
+    top:45%;
+    left:95%;
+}
+  
+#text-input{
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 50%;
+    padding: 12px 15px;
+    outline: none;
+    margin-bottom: 20px;
+}
+  
+  #input{
+    font-size: 40px;
+}
+
+/* Botão que executa o preenchimento do sigilo na imagem. Como não estava funcional do projeto original, eu o removi *;
+  #save{
+    background:transparent;
+    border:none;
+    outline:none;
+    display:block;
+    height:200px; width:200px;
+    cursor:pointer
+}
+
+*/
+
+
+/* Configurando o botão Download */
+#download {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 15px 30px;
+    color: #000;
+    background-color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: 0.2s;
+    margin-left: 25%;
+}
+
+#download:hover {
+    background-color:var(--button-hover-color);
+}
+
+
+  /* configurando app para formato celular */
+
+@media (max-width: 477px) { 
+
+    .logo {
+
+        margin-left: 40%;
+    }
+
+    h2 {
+
+        margin-left: 45%
+
+    }
+
+    .split.left{
+        width: 200%;
+        height: 200%;
+    }
+
+    #form {
+       
+        margin-right: 50%;
+        margin-left: 1%;
+        width: 70%;
+
+    }
+    #generator {
+
+        width: 70%;
+        height: 50%;        
+    }
+
+    #download {
+
+        margin-right: 50%;
+        margin-left: 1%;
+    }
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+}
+
+ 
+  
+  
+
+
+  

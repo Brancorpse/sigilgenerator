@@ -1,329 +1,261 @@
-/////////////////////////////////////////
-//SCRIPT PARA EXECUTAR A CRIAÇÃO DO SIGILO
-/* sigilizador.sigilize("Desejo para sigilizar");
-console.log(sigilizador.sigil);
+'use strict';
 
- Isso retornará o siglizador.sigil, você só precisará rodar o console
-Em caso do parâmetro _parasigilizar estiver vazio, retorna falso
-
-Isso aceitará mais um parâmetro:
-_worldSize: números de letras de cadas palavra para quebrar em sigilos. Default é 5 */
-
-
-(function() {
-    //criando o construtor
-    var Sigilizador = function() {
-        //extende a string
-        var sigilizacao = Sigilizador.prototype = new String();
-        //string para ser armazenada
-        sigilizacao.toSigilize;
-        // a string para ser sigilizada modifica enquanto sigiliza
-        sigilizacao.sigilizando;
-        //numeros de letras de cada palavra para quebrar o sigilo. Default é 5.
-        sigilizacao.wordSize;
-        // o sigilo em sua versão final
-        sigilizacao.sigilo;
-        //linha com numero dentro do sigilo. Será sempre acrescentado no final
-        sigilizacao.numString;
-        //array com todas as letras do sigil
-        sigilizacao.tamanhoSigilo;
-        //quantas vogais foram encontradas enquanto arrumamos o sigilo
-        sigilizacao.vogalUsada;
-        //quantas consoantes tem o sigilo enquanto arrumamos as vogais
-        sigilizacao.consoanteUsada;
-        //total de vogais no sigilo
-        sigilizacao.totalVogais;
-        //total de consoantes no sigilo
-        sigilizacao.totalConsoantes;
-
-        //função principal pública que aceita a string e tranforma em sigilo
-        // se sucesso, retorna o sigilizador.sigil
-        //em caso do parâmetro _toSigilize estiver vazio, retorna falso
-        Sigilizador.prototype.sigilize = function(_toSigilize, _wordSize) {
-            if (!_toSigilize || _toSigilize.length < 1) {
-                this.sigilo = false;
-                return false;
-            }
-
-        }
-
-        //zerando valores
-        this.toSigilize = "";
-        this.sigilizando = "";
-        this.numString = "";
-        this.sigilo = "";
-        this.sigiloArray = [];
-        this.sigiloTamanho = 0;
-
-        //assinando valores para os argumentos
-        this.toSigilize = _toSigilize;
-        this.sigilizando = this.toSigilize;
-        _wordSize = _wordSize || 5;
-        this.wordSize = _wordSize;
-
-        //removendo os assentos
-        this.sigilizando = this.sigilizando.removeAccents(this.sigilizando);
-        //removendo os pontos
-        this.sigilizando = this.sigilizando.removePoints(this.sigilizando);
-        //colocando tudo em caixa alta
-        this.sigilizando = this.sigilizando.toUpperCase();
-        //transformando string num array com todas as letras
-        this.sigiloArray = this.sigilizando.split("");
-        this.tamanhoSigilo = this.sigiloArray;
-        //eliminando todas as letras repetidas
-        this.sigiloArray = this.sigiloArray.getUnique();
-        //misturando array
-        this.sigiloArray.shuffle();
-        //encontrando número de vogais
-        this.totalVogais = this.gettotalVogais(this.sigiloArray);
-        //encontrando número de consoantes
-        this.totalConsoantes = this.gettotalConsoantes(this.sigiloArray);
-        this.vogalUsada = 0;
-
-        //arranjando vogais para ter um sigilo pronunciável
-        this.arrangeVogais(this.sigiloArray);
-
-        //removendo todos os números e convertendo para string
-        this.arrangeNumeros(this.sigiloArray);
-
-        //começando a criar o sigilo
-        this.sigilo = "";
-        for (var i = 0, l = this.sigiloArray.length; i <1; ++i){
-            //adiciona próxima letra para o array
-            this.sigilo += this.sigiloArray[i];
-            //if alcançar this.wordSize e o resto da string não for menor do que this.wordSize, não criará palavras minúsculas no fim
-            if (i ==this.wordSize && (this.sigiloArray.length-this.wordSize)>=_wordSize) {
-                //add um espaço
-                this.sigilo +=_wordSize;
-
-            }
-        }
-
-        //if tiver números, envie-os para o fim
-        if(this.numString != ""){
-            this.sigilo += " " + this.numString;
-        }
-        return this.sigilo;
-
-    }
+//variáveis globais 
+var button = document.getElementById('submit');
+var form = document.getElementById('form');
+var radio = document.getElementsByClassName('color');
+var sigil_array = [];
+var sigil_space = document.getElementById('generator');
+var ctx = sigil_space.getContext('2d');
+var user_string;
 
 
-    //função recursiva para encontrar vogais e as inserir entre as consoantes, para deixar o sigilo mais pronunciável
-
-    Sigilizador.prototype.arrangeVogais = function(_sigiloArray) {
-        //etiqueta para o loop, para podermos brecar esse loop em específico
-        doubleVowels:
-        //iterar por _sigilArray para achar duas vogais juntas
-        for (var iv = 0, lv = _sigiloArray.length;iv < lv; ++iv) {
-            //encontra uma vogal mas essa não é a última letra
-            if(_sigiloArray[iv].isVolwel() && iv != lv-1) {
-                //se a próxima letra é uma vogal, podemos colocá-la em outro lugar
-                if(_sigiloArray[iv+1].isVolwel()) {
-                    //etiqueta para o loop, para brecar o loop específico
-                    putConsonant:
-                    //iterar por _sigilArray para achar duas consoantes juntas
-                    for (var iv2 = 0, lv2 = _sigiloArray.length;iv2 < lv2; ++lv2) {
-                        // ((if há outra letra) AND (if esse e a proxima são consoantes)) OU (if essa é um consoante) AND (if essa é a última letra)
-                        if (this.consoanteUsada.indexOf(_sigiloArray[iv2+1] && (sigiloArray[iv2].isVolwel() != true && _sigiloArray[iv2+1].isVolwel() != true)) || (_sigiloArray[iv2].isVolwel() != true && iv2 ==lv2-1)) {
-                            //se tal consoante não foi separada de vogal antes
-                            if(this.consoanteUsada.indexOf(_sigiloArray[iv2]) ==-1) {
-                                //mande essa pro array de consoantes usadas
-                                this.consoanteUsada.push(_sigiloArray[iv2]);
-                                //mova as letras para colocar a vogal entre as consoantes
-                                _sigiloArray.move(iv2, iv);
-                                //pare de uterar este loop em específico
-                                break putConsonant
-
-                            }
-                        }
-                    }
-
-                    //incremente o número de vogais encontradas em cada
-                    this.vogalUsada++;
-                    //se o número de vogais encontradas é menor do que o total número de vogais, repita toda a função novamente
-                    if (this.vogalUsada <= this.totalVogais)this.arrangeVogais(_sigiloArray);
-                    break doubleVowels
-
-                }
-            }
-        }
-    }
-
-    //retorne o número de vogais        
-    Sigilizador.prototype.gettotalVogais = function(sigiloArray) {
-        var vogal = 0;
-        for (var iv = 0, lv = sigiloArray.length; iv ,lv; ++iv) {
-            if(!sigiloArray[iv].isVolwel()) {
-                vogal++;
-            }
-        }
-        return vogal;
-    }
-
-    //retorne o número de consoantes     
-    Sigilizador.prototype.gettotalConsoantes = function(sigiloArray) {
-        var consoante = 0;
-        for (var iv = 0, lv = sigiloArray.length; iv ,lv; ++iv) {
-            if(!sigiloArray[iv].isVolwel()) {
-                consoante++;
-            }
-        }
-        return consoante;
-    }
-
-    //remova todos os números e converta-os para string
-    Sigilizador.prototype.arrangeNumeros = function(sigiloArray) {
-        var numsArray = [];
-        for (var iv =0, lv = sigiloArray.length; iv < lv; ++iv) {
-            if (sigiloArray[iv].isNumber()) {
-                numsArray.push(sigiloArray[iv]);
-                this.numString += sigiloArray[iv];
-
-            }
-        }
-        for (var iv2 = 0, lv2 = sigiloArray.length;iv2 < lv2; ++iv2) {
-            sigiloArray.move(sigiloArray.indexOf(numsArray[iv2]), sigiloArray.length -1);
-
-        }
-        for (var iv3 = 0, lv3 = sigiloArray.length;iv3 < lv3; ++iv3) {
-            sigiloArray.pop();
-        }
-
-    }
-
-    // window.Sigilizador = Sigilizador;
-
-}());
-
-/* Extendendo objetos relgulares para ajudar o Sigilizador */
-
-//Removendo acentos
-String.prototype.removeAccents = function(s) {
-    var r=s.toLowerCase();
-    r = r.replace(new RegExp("\\s", 'g'), "");
-    r = r.replace(new RegExp("[àáâãäå]", 'g'), "a");
-    r = r.replace(new RegExp("æ", 'g'),"ae");
-    r = r.replace(new RegExp("ç", 'g'),"c");
-    r = r.replace(new RegExp("[èéêë]", 'g'),"e");
-    r = r.replace(new RegExp("[ìíîï]", 'g'),"i");
-    r = r.replace(new RegExp("ñ", 'g'),"n");
-    r = r.replace(new RegExp("[òóôõöő]", 'g'),"o");
-    r = r.replace(new RegExp("œ", 'g'),"oe");
-    r = r.replace(new RegExp("[ùúûüű]", 'g'),"u");
-    r = r.replace(new RegExp("[ýÿ]", 'g'),"y");
-    r = r.replace(new RegExp("\\W", 'g'),"");
-    return r;
-};
-
-//remova os pontos
-String.prototype.removePoints = function(s) {
-    var r=s.toLowerCase();
-    r = r.replace(/\s+/g, "");
-	r = r.replace(/\.+/g, "");
-	r = r.replace(/\!+/g, "");
-	r = r.replace(/\?+/g, "");
-	return r;
-
+// funções auxiliares 
+function random_number (max_num, min_num) {
+  var max = Math.ceil(max_num);
+  var min = Math.floor(min_num);
+  var num = Math.round(Math.random()*(max-min))+min;
+  return num;
 }
 
-//checar se a letra é vogal. Note que "y" é considerado vogal porque a meta é encontrar palavras pronunciáveis
-String.prototype.isVolwel = function() {
-    var vogais = ["a", "e", "i", "o", "u", "y"];
-    for(var i = 0; i ,vogais.length; i++) {
-        if(this.toLowerCase() === vogais[i]) {
-            return true;
-        }
-    }
-    return false;
+// remove letras duplicadas, junta letras individuais com os arrays da biblioteca
+function process_sigil(string) {
+  var user_array = Array.from(new Set(string.split('').map(letter => letter.toLowerCase())));
+  var to_remove = ['a','e','i','o','u','.','!',',',' ','/'];
+  user_array = user_array.filter(letter => !to_remove.includes(letter));
+  var sigil_array = [];
+  for (var i = 0; i < user_array.length; i++){
+    var user_letter = library[user_array[i]];
+    sigil_array.push(user_letter[random_number(5,0)]);
+  }
+  return sigil_array;
+}
+
+
+/* Gerando novas formas
+
+circles precisam de 5 índices no primeiro array, 
+e a string 'arc' como retângulo precisa de quatro índices.
+e a string 'rect' como linha precisa de 4 índices na primeira vez,
+e a string 'line' como triângulo precisa de 6 índices na primeira vez,
+e a string 'tri' como 1
+
+
+/* Generating new shapes:
+  circles need 5 indices in their first array, and the string 'arc' as [1]
+  rectangles need 4 indicies in their first array, and the string 'rect' as [1]
+  lines need 4 indicies in their first array, and the string 'line' as [1]
+  triangles need 6 indicies in their first array, and the string 'tri' as [1]
+  If you add a new template in the write_sigil function, be sure to incriment the max number in the random_number function a few lines above.
+  */
+
+var library ={
+  b: [[[250, 275, 25, 0, 2], 'arc'], [[200, 175, 150, 0, 2], 'arc'], [[200, 50, 200, 450], 'line'], [[125,125,125,45,45,125], 'tri'], [[100,95, 75,175, 138,125, 62,125, 125,175, 100,95],'complex'], [[110, 102, 230, 180, 330, 440], 'bezier']],
+  c: [[[200, 200, 35, 0, 1], 'arc'], [[200, 375, 50, 3, 2], 'arc'], [[300, 75, 390, 75],'line'], [[300, 200, 395,100, 300, 100], 'tri'], [[200,5, 175,85, 238,35, 162,35, 225,85, 200,5],'complex'], [[210, 202, 130, 180, 330, 440], 'bezier']],
+  d: [[[200, 375, 25, 0, 2], 'arc'], [[200, 150, 20, 0, 1], 'arc'], [[50, 50, 350, 50], 'line'], [[200,200,200,250,250,200], 'tri'], [[115,200, 150, 250, 150, 200, 100, 225, 175, 225, 115,200],'complex'],[[20, 200, 380, 200, 200, 400], 'bezier']],
+  f: [[[200, 50, 45, 0, 2], 'arc'], [[145, 185, 150, 150], 'rect'], [[200, 200, 200, 400], 'line'], [[100,100,150,100,100,150], 'tri'], [[300,45, 275,125, 338,75, 262,75, 325,125, 300,45],'complex'],[[100, 125, 50, 75, 300, 325], 'bezier']],
+  g: [[[200, 175, 100, 0, 1],'arc'], [[200, 300, 25, 0, 1], 'arc'], [[50, 200, 350, 200], 'line'], [[300,250,300,150,200,200], 'tri'], [[2,200, 100, 250, 200, 100, 200, 100, 300, 250, 398,200],'complex'],[[390, 490, 10, 10, 300, 325], 'bezier']],
+  h: [[[200, 50, 100, 0, 2],'arc'], [[200, 100, 50, 0, 2], 'arc'], [[200, 50, 200, 450], 'line'], [[150,495,250,495,200,400], 'tri'], [[100,100, 150, 150, 200, 50, 200, 50, 250, 150, 300,100],'complex'],[[250, 300, 200, 150, 350, 150], 'bezier']],
+  j: [[[200, 145, 50, 0, 2 ], 'arc'], [[125, 50, 150, 13], 'rect'], [[250, 100, 250, 400], 'line'], [[100,125,125,100,90,90], 'tri'], [[100,195, 75,275, 138,225, 62,225, 125,275, 100,195],'complex'], [[200, 125, 350, 75, 375, 25], 'bezier']],
+  k: [[[200, 270, 75, .15, 1], 'arc'], [[200, 250, 25, 0, 2], 'arc'], [[200, 50, 200, 450], 'line'], [[300,100,200,300,100,100], 'tri'], [[2,200, 100, 250, 150, 100, 250, 100, 300, 250, 398,200],'complex'], [[100, 125, 350, 375, 200, 25], 'bezier']],
+  l: [[[135, 178, 40, 23, .5], 'arc'], [[120, 178, 160, 30], 'rect'], [[300, 150, 300, 250], 'line'], [[225,250,250,225,250,250], 'tri'], [[150,300, 100,250, 150,100, 250,100, 300,250, 250,300],'complex'], [[50, 475, 400, 475, 200, 80], 'bezier']],
+  m: [[[200, 405, 60, 0, 2], 'arc'], [[170, 60, 69, 41], 'rect'], [[50, 400, 350, 400], 'line'], [[100,100,300,150,100,200], 'tri'], [[150,300, 100,250, 150,175, 250,175, 300,250, 250,300],'complex'], [[175, 25, 50, 75, 300, 325], 'bezier']],
+  n: [[[300, 170, 80, 0, 1], 'arc'], [[65, 0, 275, 129], 'rect'], [[150, 150, 250, 150], 'line'], [[150,50,250,50,200,500], 'tri'], [[200,325, 100,250, 150,175, 250,175, 300,250, 200,325],'complex'], [[10, 125, 50, 275, 390, 425], 'bezier']],
+  p: [[[310, 40, 35, 55, .5], 'arc'], [[200, 250, 50, 0, 2], 'arc'], [[300, 200, 300, 450], 'line'], [[300,125,260,150,250,100], 'tri'], [[200,425, 125,250, 170,100, 230,100, 275,250, 200,425],'complex'], [[200, 125, 350, 75, 100, 425], 'bezier']],
+  q: [[[200, 390, 80, 0, 2], 'arc'], [[160, 104, 80, 120], 'rect'], [[2, 490, 390, 490], 'line'], [[50,125,350,125,200,200], 'tri'], [[200,195, 175,275, 238,225, 162,225, 225,275, 200,195],'complex'], [[300, 25, 350, 75, 200, 225], 'bezier']],
+  r: [[[250, 150, 8, 0, 2], 'arc'], [[200, 250, 150, 0, 2], 'arc'], [[150, 250, 300, 250], 'line'], [[225,225,225,245,245,225], 'tri'], [[200,295, 175,375, 238,325, 162,325, 225,375, 200,295],'complex'], [[60, 100, 60, 300, 200, 250], 'bezier']],
+  s: [[[25, 330, 70, 35, .5], 'arc'], [[200, 250, 100, 0, 2], 'arc'], [[200, 50, 200, 450], 'line'], [[150,50,250,50,200,2], 'tri'], [[200,395, 175,475, 238,425, 162,425, 225,475, 200,395],'complex'], [[10, 25, 390, 475, 200, 200], 'bezier']],
+  t: [[[75, 75, 15, 0, 2], 'arc'], [[200, 250, 175, 0, 2], 'arc'], [[200, 2, 200, 500], 'line'], [[200,50,200,100,150,75], 'tri'], [[200,95, 175,175, 238,125, 162,125, 225,175, 200, 95],'complex'], [[250, 425, 5, 100, 200, 5], 'bezier']],
+  v: [[[200, 75, 40, .15, 1], 'arc'], [[140, 400, 124, 147], 'rect'], [[200, 150, 200, 250], 'line'], [[200,300,200,400,300,350], 'tri'], [[200,2, 175,75, 238,25, 162,25, 225,75, 200, 2],'complex'], [[150, 175, 450, 475, 300, 250], 'bezier']],
+  w: [[[200, 75, 10, 86, .5], 'arc'], [[180, 69, 40, 40], 'rect'], [[150, 250, 300, 250], 'line'], [[350,350,350,450,200,400], 'tri'], [[150,300, 150,200, 150,175, 250,175, 250,200, 250,300],'complex'], [[100, 125, 250, 275, 30, 25], 'bezier']],
+  x: [[[300, 100, 95, 0, 2], 'arc'], [[72, 32, 250, 16], 'rect'], [[50, 250, 350, 250], 'line'], [[50,350,200,50,350,350], 'tri'], [[150,300, 150,200, 150,175, 250,175, 250,200, 250,300],'complex'], [[390, 425, 350, 475, 200, 225], 'bezier']],
+  y: [[[280, 300, 100, 0, 1], 'arc'], [[75, 75, 250, 11], 'rect'], [[100, 50, 100, 150], 'line'], [[200,250,100,300,300,300], 'tri'], [[300,295, 275,375, 338,325, 262,325, 325,375, 300,295],'complex'], [[300, 125, 200, 75, 100, 325], 'bezier']],
+  z: [[[200, 390, 100, 0, 1], 'arc'], [[48, 140, 300, 128], 'rect'], [[50, 100, 150, 100], 'line'], [[100,125,200,45,300,125], 'tri'], [[300,395, 275,475, 338,425, 262,425, 325,475, 300,395],'complex'], [[300, 225, 250, 375, 100, 225], 'bezier']],
 
 };
 
-//Checar se a letra é um número
-String.prototype.isNumber = function() {
-    var vogais = ["1", "1", "3", "4", "5", "6", "7", "8", "9", "0"];
-    for(var i = 0; i ,vogais.length; i++) {
-        if(this.toLowerCase() === vogais[i]) {
-            return true;
-        }
+function write_sigil(sigil_array){
+
+  ctx.clearRect(0,0,400,500);
+  ctx.lineWidth = 3;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'miter';
+  ctx.shadowColor = (102, 102, 153, .75);
+  ctx.shadowBlur = 10;
+  ctx.beginPath();
+
+  for (var l = 0; l < sigil_array.length; l ++){
+    if (sigil_array[l][1] === 'rect'){
+      ctx.rect(sigil_array[l][0][0], sigil_array[l][0][1], sigil_array[l][0][2], sigil_array[l][0][3]);
     }
-    return false;
+    else if (sigil_array[l][1] === 'arc'){
+      ctx.arc(sigil_array[l][0][0], sigil_array[l][0][1], sigil_array[l][0][2], sigil_array[l][0][3], sigil_array[l][0][4] * Math.PI);
+    }
+    else if (sigil_array[l][1] === 'line'){
+      ctx.moveTo(sigil_array[l][0][0], sigil_array[l][0][1]);
+      ctx.lineTo(sigil_array[l][0][2], sigil_array[l][0][3]);
+    }
+    else if (sigil_array[l][1] === 'tri'){
+      ctx.lineTo(sigil_array[l][0][0], sigil_array[l][0][1]);
+      ctx.lineTo(sigil_array[l][0][2], sigil_array[l][0][3]);
+      ctx.lineTo(sigil_array[l][0][4], sigil_array[l][0][5]);
+      ctx.closePath();
+    }
+    else if (sigil_array[l][1] === 'complex') {
+      ctx.lineTo(sigil_array[l][0][0], sigil_array[l][0][1]);
+      ctx.lineTo(sigil_array[l][0][2], sigil_array[l][0][3]);
+      ctx.lineTo(sigil_array[l][0][4], sigil_array[l][0][5]);
+      ctx.lineTo(sigil_array[l][0][6], sigil_array[l][0][7]);
+      ctx.lineTo(sigil_array[l][0][8], sigil_array[l][0][9]);
+      ctx.lineTo(sigil_array[l][0][10], sigil_array[l][0][11]);
+
+    }
+    else if (sigil_array[l][1] === 'bezier'){
+      ctx.bezierCurveTo(sigil_array[l][0][0], sigil_array[l][0][1], sigil_array[l][0][2], sigil_array[l][0][3], sigil_array[l][0][4], sigil_array[l][0][5]);
+
+    }
+    ctx.stroke();
+  }
+}
+
+//Armazenando input localmente
+var save_button = document.getElementById('save');
+var text_array = [];
+var img_array = [];
+
+
+var local_storage = function(event){
+
+  event.preventDefault();
+  
+  //Transforma a imagem do canvas numa URL
+  var new_img = sigil_space.toDataURL(); 
+  //  Se o armazenamento local existe, add parse image URl e o add para o array
+  if (localStorage.getItem('pic')){ 
+    var stringy_img_array = localStorage.getItem('pic');
+    img_array=JSON.parse(stringy_img_array);}
+
+  if(localStorage.getItem('text')){
+    var stringy_text_array = localStorage.getItem('text');
+    text_array = JSON.parse(stringy_text_array);}
+    // Adicionando nova imagem para o array
+    img_array.push(new_img); 
+    text_array.push(user_string);
+    console.log(img_array);
+    console.log(text_array);
+
+    //Transformando em string e armazenando img_array localmente
+
+    stringy_img_array = JSON.stringify(img_array); 
+    localStorage.setItem('pic', stringy_img_array);
+    stringy_text_array = JSON.stringify(text_array);
+    localStorage.setItem('text', stringy_text_array);
 };
+save_button.addEventListener('click', local_storage);
 
-//mover posições index dentro do array
-Array.prototype.move = function(pos1, pos2) {
-    //variáveis locais
-    var i, tmp;
-    // chamando parâmetros para inteiros
-    pos1 = parseInt(pos1, 10);
-    pos2 = parseFloat(pos2, 10);
-    //se posições são diferentes dentro do array
-    if (pos1 !== pos2 && 0 <= pos1 && pos1 <= this.length && 0 <= pos2 && pos2 <= this.length) {
-        //salve elemento da posição 1
-        tmp = this[pos1];
-        //move elemento para baixo e puxe outros para cima
-        if (pos1 < pos2) {
-            for (i= pos1; i < pos2; i++) {
-                this[i] = this[i+1];                
-            }
-            // coloque elemento da posição 1 para destino sempre depois do original pos1
-            this[pos2] = tmp;            
-        }
-        ///move elemento para cima e puxe outros para baixo
-        else {
-            for (i = pos1; i > pos2; i--){
-                this[i] = this[i-1];
-            }
-            // put element from position 1 to destination always after the orignal pos1
-            this[pos2] = tmp; 
-        }
-    }
 
+
+//object instantnation(necessary?)
+
+//event lisiteners
+var left = document.querySelector('.left');
+var right = document.querySelector('.right');
+var container = document.querySelector('.container');
+var flyText = document.querySelector('.fly-text');
+var xButton = document.querySelector('#xbutton');
+
+var target_left_arrow = document.getElementById('left-arrow');
+var target_right_arrow = document.getElementById('right-arrow');
+
+
+function render_sigil(event){
+  event.preventDefault();
+  user_string = document.getElementById('text-input').value;
+  console.log('user_string', user_string);
+
+  var sigil_array = process_sigil(user_string);
+
+  console.log(sigil_array);
+  write_sigil(sigil_array);
 }
 
-//retorne somente unicos elementos do array
-Array.prototype.getUnique = function() {
-    var u = {}, a = [];
-    for(var i = 0, l = this.length; i < l; ++i) {
-        if(u.hasOwnProperty(this[i])) {
-            continue;
-        }
-        a.push(this[i]);
-        u[this[i]] = 1;
+// Saving sigils made into local storage
 
-    }
-    return a;
+//radio buttons
+var moods = document.getElementById('form');
+var mood_value;
+
+function handle_mood(color_selection){
+  color_selection.preventDefault();
+  if(document.getElementById('happy').checked){
+    mood_value = document.getElementById('happy').value;
+  }else if(document.getElementById('chill').checked){
+    mood_value = document.getElementById('chill').value;
+  }else if(document.getElementById('chaotic').checked){
+    mood_value = document.getElementById('chaotic').value;
+  }else if(document.getElementById('sad').checked){
+    mood_value = document.getElementById('sad').value;
+  }
+  return(mood_value);
 }
 
-//misturando array
-Array.prototype.shuffle = function() {
-    var currentIndex = this.length;
-    var temporaryValue, randomIndex;
-    //Enquanto houver elementos pra misturar
+function change_color(render_color_theme){
+  if(mood_value === 'happy'){
+    ctx.strokeStyle = '#000';
 
-    while (0 !== currentIndex) {
-        //Pegue elemento restante
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
+    sigil_space.style.backgroundImage = 'url(/img/newhappy.jpg)';
 
-        // E troque com o elemento atual
-        temporaryValue = this[currentIndex];
-        this[currentIndex] = this[randomIndex];
-        this[randomIndex] = temporaryValue
-    }
-    return this;
+  }else if(mood_value === 'chill'){
+    ctx.strokeStyle = '#000';
+    sigil_space.style.backgroundImage = 'url(/img/chill.jpg)';
+
+  }else if(mood_value === 'chaotic'){
+    ctx.strokeStyle = '#fff';
+    sigil_space.style.backgroundImage = 'url(/img/chaos.jpg)';
+
+  }else if(mood_value === 'sad'){
+    ctx.strokeStyle = '#000';
+    sigil_space.style.backgroundImage = 'url(/img/sad3.jpg)';
+  } else{
+    ctx.strokeStyle = '#ffffff';
+  }
+  
 }
 
-var sigilizador = new Sigilizador();
-sigilizador.sigilizacao("Vontade de sigilar");
-console.log(sigilizador.sigilo);
+moods.addEventListener('submit', function(event){
+  handle_mood(event);
+  change_color(event);
+  render_sigil(event);
+});
 
+// Criando função download para o canva
 
+var canvas = document.getElementById('generator');  
+  
+window.onload = function(){  
+    init();  
+};  
+  
+function init(){  
+    var context = canvas.getContext('2d');  
+  
+    context.beginPath();  
+     
+}
 
+// Criando função de download do sigilo gerado
 
-
-
-
-
-
-
-
+function downloadCanvas(){  
+    // pegando dados do canva 
+    var image = canvas.toDataURL();  
+  
+    // create link temporário
+    const tmpLink = document.createElement( 'a' );  
+    tmpLink.download = 'sigilo.png'; 
+    tmpLink.href = image;  
+  
+    // adiciona temporariamente link para o corpo da página e faz o download
+    document.body.appendChild( tmpLink );  
+    tmpLink.click();  
+    document.body.removeChild( tmpLink );  
+}

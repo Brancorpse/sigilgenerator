@@ -1,55 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Sigilizador Magia do Caos</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' href="style.css">  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Gerador de Sigilos</title>
+  <link rel="stylesheet" type="text/css" href = "style.css">
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 </head>
 
-<script type="text/javascript" src="../src/sigilizador.js"></script>
+<body>
 
-<! Chamando função que executa o sigilizador -->
-<script>
-    var sigilizador;
-    global.onload = function () { 
-        sigilizador =  new Sigilizador();                
-            
-    }
-    
-    function getSigilo(_vontade) {
-        sigilizador.sigilize(_vontade);
-        document.getElementById('mostrarSigiloFeito').innerHTML = sigilizador.sigilo;    
-    }    
+    <! Configuando imagem caosfera no topo da página -->
 
-</script>
-<body>  
-
-    <! Criando corpo da página principal -->
     <div>        
-        <a href="#"><img src="caosfera.png" class="logo" alt=""></a>        
+        <a href="#"><img src="img/caosfera.png" class="logo" alt=""></a>        
     </div>
-    <br>
-    <br>
-    <h1>Sigilizador</h1>
+    <h2>Gerador de Sigilos</h2>
+    <br><br><br>
+    <div class="container">        
+        <div class="split right">
 
-    <br>
-    <br>
-    <br>
+            <img id="left-arrow" src="">
+        </div>
+        <div class="split left">
+            <img id="right-arrow" src="">
+        </div>
 
-    <div id="conteudoSigilo">
-        <div id="sigiloForm" >
-            <input type="text" maxlength="200" class="geradorsigiloTextarea" name="textosigilo" id="camposigilo" value="Esta é minha vontade para sigilizar." autocomplete='off' />
-            <div id="button">
-                <br>
-                <br>
-                <br>
+    <! Configurando o gerador de sigilos -->
+        
+    <section id="generator-container">        
+        <form id="form">       
             
-                <input class="estilobotao" type="submit" name="button" id="botaosigilo" value="Sigilize!" onclick="getSigilo(document.getElementById('camposigilo').value)" />    
-            </div>
-            <div id="mostrarSigiloFeito"></div>
-        </div>    
-    </div>    
+            <input type="text" id="text-input" maxlength="200" name="text-input" placeholder="Digite o desejo a ser carregado">
+
+            <div id="mood">                
+                <input type="radio" id="happy" name="color" value="happy">
+                <label for="color-option1">Feliz</label>
+                
+                <input type="radio" id="chill" name="color" value="chill" >
+                <label for="color-option2">Sereno</label>
+                
+                <input type="radio" id="chaotic" name="color" value="chaotic">
+                <label for="color-option3">Caótico</label>
+                
+                <input type="radio" id="sad" name="color" value="sad">
+                <label for="color-option4">Triste</label>
+            </div> 
+            <br><br>           
+            <input type="submit" id="submit" value="GERAR SIGILO!!!"> 
+            <br><br>               
+        </form>
+        <canvas id="generator" width="400" height="500"></canvas>
+        <! Botão abaixo não utilizado, do projeto original -->
+        <button type="button" id="save"></button>
+        <br><br>
+        <button id = "download" onclick="downloadCanvas()">DOWNLOAD SIGILO!</button>
+
+    </section>
+    </div>
+
+<script src = "sigilizador.js" type = "text/javascript"></script>
+
 </body>
+
 </html>
