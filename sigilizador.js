@@ -231,29 +231,22 @@ moods.addEventListener('submit', function(event){
 // Criando função download para o canva
 
 var canvas = document.getElementById('generator');  
-  
 window.onload = function(){  
     init();  
-};  
-  
+};    
 function init(){  
-    var context = canvas.getContext('2d');  
-  
-    context.beginPath();  
-     
+    var context = canvas.getContext('2d');    
+    context.beginPath();       
 }
-
 // Criando função de download do sigilo gerado
 
 function downloadCanvas(){  
     // pegando dados do canva 
-    var image = canvas.toDataURL();  
-  
+    var image = canvas.toDataURL();   
     // create link temporário
     const tmpLink = document.createElement( 'a' );  
     tmpLink.download = 'sigilo.png'; 
     tmpLink.href = image;  
-  
     // adiciona temporariamente link para o corpo da página e faz o download
     document.body.appendChild( tmpLink );  
     tmpLink.click();  

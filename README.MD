@@ -1,67 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Gerador de Sigilos</title>
-  <link rel="stylesheet" type="text/css" href = "style.css">
-  <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-</head>
+<html>
 
-<body>
-
-    <! Configuando imagem caosfera no topo da página -->
-
-    <div>        
-        <a href="#"><img src="img/caosfera.png" class="logo" alt=""></a>        
-    </div>
-    <h2>Gerador de Sigilos</h2>
-    <br><br><br>
-    <div class="container">        
-        <div class="split right">
-
-            <img id="left-arrow" src="">
-        </div>
-        <div class="split left">
-            <img id="right-arrow" src="">
-        </div>
-
-    <! Configurando o gerador de sigilos -->
-        
-    <section id="generator-container">        
-        <form id="form">       
-            
-            <input type="text" id="text-input" maxlength="200" name="text-input" placeholder="Digite o desejo a ser carregado">
-
-            <div id="mood">                
-                <input type="radio" id="happy" name="color" value="happy">
-                <label for="color-option1">Feliz</label>
-                
-                <input type="radio" id="chill" name="color" value="chill" >
-                <label for="color-option2">Sereno</label>
-                
-                <input type="radio" id="chaotic" name="color" value="chaotic">
-                <label for="color-option3">Caótico</label>
-                
-                <input type="radio" id="sad" name="color" value="sad">
-                <label for="color-option4">Triste</label>
-            </div> 
-            <br><br>           
-            <input type="submit" id="submit" value="GERAR SIGILO!!!"> 
-            <br><br>               
-        </form>
-        <canvas id="generator" width="400" height="500"></canvas>
-        <! Botão abaixo não utilizado, do projeto original -->
-        <button type="button" id="save"></button>
-        <br><br>
-        <button id = "download" onclick="downloadCanvas()">DOWNLOAD SIGILO!</button>  
-        <br><br>        
-        <h3>Modo de Usar: </h3> 
-        <br><br><br><br>   
         <p><b>Sigilos</b> são a representação simbólica de um desejo/intento do praticante de magia. São usados há muito tempo, desde os selos da goécia, as práticas de vodu, nos símbolos planetários, e muitos outros. No inicio do século XX, foram popularizados pelo artista e ocultista Austin Osman Spare, passando a ter uma utilidade prática e moderna, sendo muito comum a sua utilização hoje em dia entre os praticantes de Magia do Caos. O objetivo desta ferramenta é facilitar ao povo a utilização de sigilos para assim, conseguirmos tesouros para enriquecer a nosso mundo sólido e alterar a realidade em nosso alcance.</p>
             <br>            
             <p>Como trabalhar com sigilos?</p>
@@ -114,13 +52,7 @@
             <p>Mágica Visual (Jon Fries)</p>
             <p>Pop Magick (Grant Morrison)</p>
             <p>Advanced Magick for Beginners (Alan Chapman)</p>   
-            <br><br><br><br>        
-            
+            <br><br><br><br>  
 
-    </section>     
 
-<script src = "sigilizador.js" type = "text/javascript"></script>
 
-</body>
-
-</html>

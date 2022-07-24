@@ -47,17 +47,6 @@ h2 {
     width: 20%;  
     font-family: 'Mulish';
 }
-
-  
-h1 {
-    font-size:4rem;
-    color:#fff;
-    position:absolute;
-    left:50%;
-    top:15%;
-    transform:translateX(-50%);
-    white-space:nowrap;
-  }
   
   .container {
     position:relative;
@@ -98,8 +87,14 @@ h1 {
     padding:3%;
     color:white;
     text-align: center;
-    margin-right:10%;
-    margin-left: 10%;
+    margin-right:67%;
+    margin-left: 0%;
+}
+
+#text-input {
+    width: 100%;
+    
+
 }
 
 /* Configurando radio-buttons */
@@ -189,17 +184,32 @@ h1 {
     border: none;
     outline: none;
     transition: 0.2s;
-    margin-left: 25%;
+    margin-left: 8%;
 }
 
 #download:hover {
     background-color:var(--button-hover-color);
 }
 
+h3 {
+    color: #fff;
+    margin-left: 0%;
+    width: 2px;
+}
+
+h3 {
+    width: 200px;
+}
+
+p {
+    margin-right: 65%;
+    
+}
+
 
   /* configurando app para formato celular */
 
-@media (max-width: 477px) { 
+@media (max-width: 667px) { 
 
     .logo {
 
@@ -212,43 +222,73 @@ h1 {
 
     }
 
-    .split.left{
-        width: 200%;
-        height: 200%;
+    .split.left {
+        width: 100%;
+        height: 0%;
     }
 
-    #form {
+    #form {        
        
-        margin-right: 50%;
-        margin-left: 1%;
-        width: 70%;
-
-    }
+        margin-right: 2%;
+        width: 400px;     
+    }   
     #generator {
 
         width: 70%;
-        height: 50%;        
+        height: 30%;
+        margin-left: 10%;
+                
     }
 
     #download {
-
-        margin-right: 50%;
-        margin-left: 1%;
+        
+        margin-left: 10%;
     }
 
+    h3 {
+        width: 1px; 
+        margin-left: 10%;      
 
+    }
 
+    p  {
+        margin-right: 100px;                
 
-
-
-
-
-
-  
-
-
+    }
   
 }
+
+@media (max-width: 1024px) {
+
+    .split.left{
+        width: 200%;
+        height: 85%;
+    }
+
+    #form {         
+        
+        width: 400px;     
+    }   
+
+    #download {
+        
+        margin-left: 20%;
+    }
+
+    h3 {
+        margin-right: 50%;
+        height: 20px;
+
+    }
+
+    p  {
+        margin-right: 100px;                
+
+    }
+
+}
+
+
 
  
   
