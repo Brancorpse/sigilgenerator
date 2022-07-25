@@ -1,5 +1,9 @@
 <html>
 
+<body>
+
+
+	<h1>Gerador de Sigilos</h1>
         <p><b>Sigilos</b> são a representação simbólica de um desejo/intento do praticante de magia. São usados há muito tempo, desde os selos da goécia, as práticas de vodu, nos símbolos planetários, e muitos outros. No inicio do século XX, foram popularizados pelo artista e ocultista Austin Osman Spare, passando a ter uma utilidade prática e moderna, sendo muito comum a sua utilização hoje em dia entre os praticantes de Magia do Caos. O objetivo desta ferramenta é facilitar ao povo a utilização de sigilos para assim, conseguirmos tesouros para enriquecer a nosso mundo sólido e alterar a realidade em nosso alcance.</p>
             <br>            
             <p>Como trabalhar com sigilos?</p>
@@ -55,4 +59,5 @@
             <br><br><br><br>  
 
 
-
+	<body>
+<html>
