@@ -203,7 +203,7 @@ function change_color(render_color_theme){
   if(mood_value === 'happy'){
     ctx.strokeStyle = '#000';
 
-    sigil_space.style.backgroundImage = 'url(/img/newhappy.jpg)';
+    sigil_space.style.backgroundImage = 'url(/img/newhappy.jpg)'; 
 
   }else if(mood_value === 'chill'){
     ctx.strokeStyle = '#000';
