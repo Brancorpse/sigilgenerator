@@ -63,7 +63,7 @@ h2 {
   
 .split.left{
     left:0;
-    background:url("/img/black.jfif") center center no-repeat;
+    background:url('/img/black.jfif') center center no-repeat;
     background-size: cover;
     width: 100%;
 }
