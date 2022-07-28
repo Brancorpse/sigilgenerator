@@ -194,7 +194,7 @@ h2 {
 h3 {
     color: #fff;
     margin-left: 0%;
-    width: 2px;
+    width: 100%;
 }
 
 h3 {
@@ -213,46 +213,59 @@ p {
 
     .logo {
 
-        margin-left: 40%;
+        margin-left: 65%;
     }
 
     h2 {
 
-        margin-left: 45%
+        margin-left: 70%
 
     }
 
     .split.left {
-        width: 100%;
+        width: 40%;
         height: 0%;
     }
 
     #form {        
        
         margin-right: 2%;
-        width: 400px;     
+        width: 400px;   
+
     }   
     #generator {
 
-        width: 70%;
+        width: 65%;
         height: 30%;
-        margin-left: 10%;
+        margin-left: 18%;
                 
     }
+    #text-input {
+        width: 85%;
+    }
 
-    #download {
+    #download {        
+        margin-left: 60%;
+        background-color: #000;
+        color:#fff;
+
+    }
+
+
+    #download:hover {
+        background-color: #000;
         
-        margin-left: 10%;
     }
 
     h3 {
-        width: 1px; 
-        margin-left: 10%;      
+        width: 100%; 
+        margin-left: 25%; 
+        color: #000;     
 
     }
 
     p  {
-        margin-right: 100px;                
+        margin-left: 20%;                
 
     }
   
